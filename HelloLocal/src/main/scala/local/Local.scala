@@ -12,8 +12,11 @@ object Local extends App {
 
 class LocalActor extends Actor {
 
+  import local.Local._
+
+  private val path = "akka.tcp://HelloRemoteSystem@127.0.0.1:5150/user/RemoteActor"
   // create the remote actor
-  val remote = context.actorFor("akka://HelloRemoteSystem@127.0.0.1:5150/user/RemoteActor")
+  val remote = system.actorSelection(path)
   var counter = 0
 
   def receive = {
